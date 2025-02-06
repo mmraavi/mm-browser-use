@@ -433,6 +433,28 @@ class Controller:
 				logger.error(msg)
 				return ActionResult(error=msg, include_in_memory=True)
 
+
+		@self.registry.action(
+			description='Wait for a specified duration in seconds.',
+		)
+		async def wait(duration: float) -> ActionResult:
+				await asyncio.sleep(duration)
+				msg = f'Waited for {duration} seconds'
+				logger.debug(msg)
+				return ActionResult(extracted_content=msg, include_in_memory=True)
+
+		@self.registry.action(
+				description='Display a message and wait for user input. If no message is provided, simply wait for Enter key.',
+		)
+		async def prompt_input(message: Optional[str] = None) -> ActionResult:
+				if message is not None:
+						user_input = input(f'\n{message}\nInput: ')
+				else:
+						user_input = input('\nPress Enter to continue...\nInput: ')
+				msg = f'User input received: {user_input}'
+				logger.debug(msg)
+				return ActionResult(extracted_content=msg, include_in_memory=True)
+
 	def action(self, description: str, **kwargs):
 		"""Decorator for registering custom actions
 
