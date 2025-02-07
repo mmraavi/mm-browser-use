@@ -1,5 +1,5 @@
 [project]
-name = "browser-use"
+name = "mm-browser-use"
 description = "Make websites accessible for AI agents"
 authors = [
     { name = "Gregor Zunic" }
@@ -41,6 +41,9 @@ dev = [
     "pytest>=8.3.3",
     "pytest-asyncio>=0.24.0"
 ]
+
+[tool.hatch.build.targets.wheel]
+packages = ["mm_browser_use"]
 
 [tool.ruff]
 line-length = 130
